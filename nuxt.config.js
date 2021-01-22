@@ -61,5 +61,49 @@ export default {
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {},
+  build: {
+    buildDir: '.nuxt',
+    publicPath: '/assets/',
+    //https://github.com/nuxt/nuxt.js/issues/3828#issuecomment-508428611
+    filenames: {
+      app: ({ isDev }) => isDev ? '[name].[hash].js' : '[chunkhash].js',
+      chunk: ({ isDev }) => isDev ? '[name].[hash].js' : '[chunkhash].js'
+    },
+    babel: {
+      presets({ isServer }) {
+        let targets = isServer ? { node: '10' } : { ie: '11' }
+        return [
+          [require.resolve('@nuxt/babel-preset-app'),
+            {
+              // targets
+              buildTarget: isServer ? 'server' : 'client',
+              corejs: { version: 3 }
+            }
+          ]
+        ]
+      },
+      'env': {
+        'production': {
+          'plugins': []
+        }
+      }
+    },
+    /*
+    ** You can extend webpack config here
+    */
+    extend(config, ctx) {
+      //Run ESLint on save
+      if(ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+          options: {
+            fix: true
+          }
+        })
+      }
+    }
+  }
 }
