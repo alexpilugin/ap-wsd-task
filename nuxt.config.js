@@ -1,6 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  ssr: true, //Server Side Rendering
+  ssrLog: true,
+  dev: process.env.NODE_ENV !== 'production',
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     titleTemplate: '%s - ap-wsd-task',
@@ -36,10 +39,22 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    [
+      '@nuxtjs/component-cache',
+      {
+        max: 10000,
+        maxAge: 1000 * 60 * 60
+      }
+    ]
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {},
+  
+  //issue: Nuxt is really slow: https://github.com/nuxt/nuxt.js/issues/6508
+  vueMeta: {
+    debounceWait: 250
+  },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {
@@ -62,6 +77,9 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    parallel: true,
+    cache: true,
+    transpile: ['vue-intersect'],
     buildDir: '.nuxt',
     publicPath: '/assets/',
     //https://github.com/nuxt/nuxt.js/issues/3828#issuecomment-508428611
@@ -92,7 +110,15 @@ export default {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-      //Run ESLint on save
+      // Extend Webpack to load audio files
+      config.module.rules.push({
+        test: /\.(ogg|mp3|mp4|wav|mpe?g)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '\[path\][name].[ext]'
+        }
+      })
+      // Run ESLint on save
       if(ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
