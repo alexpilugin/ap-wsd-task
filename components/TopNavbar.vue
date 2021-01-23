@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/sass/ui.scss';
+@import '~/assets/sass/variables.scss';
 
 .app-bar {
   height: 88px;
