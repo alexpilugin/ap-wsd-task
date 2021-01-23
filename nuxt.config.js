@@ -4,7 +4,13 @@ export default {
   ssr: true, //Server Side Rendering
   ssrLog: true,
   dev: process.env.NODE_ENV !== 'production',
+  telemetry: false, /* ignore the Nuxt.js starting question */
   // Global page headers (https://go.nuxtjs.dev/config-head)
+    /*
+   ** Nuxt target
+   ** See https://nuxtjs.org/api/configuration-target
+   */
+  target: 'server',
   head: {
     titleTemplate: '%s - ap-wsd-task',
     title: 'ap-wsd-task',
@@ -35,6 +41,8 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
+    // Doc: https://http.nuxtjs.org
+    '@nuxt/http',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
@@ -47,6 +55,12 @@ export default {
       }
     ]
   ],
+  /*
+  ** Server Middleware
+  */
+  serverMiddleware: {
+    '/api': '~/api'
+  },
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {},
@@ -58,9 +72,10 @@ export default {
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ['~/assets/sass/variables.scss'],
     theme: {
       dark: true,
+      default: 'light',
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -70,6 +85,15 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3,
+        },
+        light: {
+          primary: '#1976D2',
+          secondary: '#424242',
+          accent: '#82B1FF',
+          error: '#FF5252',
+          info: '#2196F3',
+          success: '#4CAF50',
+          warning: '#FB8C00',
         },
       },
     },
