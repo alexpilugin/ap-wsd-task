@@ -1,31 +1,157 @@
 {
-  "records": [
+  "lists": [
     {
-      "id": "bensound-anewbeginning-xftndu",
-      "url": "assets/audio/bensound-anewbeginning.mp3",
-      "title": "A New Beginning",
-      "composer": "Benjamin Tissot (also known as Bensound)",
-      "description": "Pop rock royalty free music with an epic and \"achievement\" feeling. The song start with a guitar intro that progressively lead to a powerful and energetic chorus.",
-      "image": {
-        "url": "assets/images/anewbeginning.jpg",
-        "description": "Image copyright: Olga Zakharova - Shutterstock"
-      },
-      "tags": [
-        "rock", "uplifting", "success", "positive", "hope", "hopeful", "optimistic", "motivation", "invincible", "corporate", "electric", "guitar", "epic", "energy", "energetic", "emotional", "confidence", "business", "piano" 
+      "id": "azbdhoh-01",
+      "title": "List Number One",
+      "description": "Playlist with Wonderful Pop Rock Royalty Free Music. ",
+      "records": [
+        {
+          "id": "bensound-anewbeginning-01",
+          "url": "audio/bensound-anewbeginning.mp3",
+          "title": "A New Beginning",
+          "composer": "Benjamin Tissot (also known as Bensound)",
+          "description": "Pop rock royalty free music with an epic and \"achievement\" feeling. The song start with a guitar intro that progressively lead to a powerful and energetic chorus.",
+          "image": {
+            "url": "images/anewbeginning.jpg",
+            "description": "Image copyright: Olga Zakharova - Shutterstock"
+          },
+          "tags": [
+            "rock", "uplifting", "success", "positive", "hope", "hopeful", "optimistic", "motivation", "invincible", "corporate", "electric", "guitar", "epic", "energy", "energetic", "emotional", "confidence", "business", "piano" 
+          ]
+        },
+        {
+          "id": "bensound-ukulele-02",
+          "url": "audio/bensound-ukulele.mp3",
+          "title": "Ukulele",
+          "composer": "Benjamin Tissot (also known as Bensound)",
+          "description": "Happy and light royalty free ukulele music featuring ukulele, finger snapping, pizzicato strings and drums. This track will be great to add this \"feel good\" mood to your projects.",
+          "image": {
+            "url": "images/ukulele.jpg",
+            "description": "Image copyright: bluelela - Shutterstock"
+          },
+          "tags": [
+            "ukulele", "happy", "funny", "advertising", "upbeat", "kid", "kids", "positive", "chidren", "joy", "fun", "acoustic", "light", "gentle" 
+          ]
+        },
+        {
+          "id": "bensound-ukulele-022",
+          "url": "audio/bensound-ukulele.mp3",
+          "title": "Ukulele",
+          "composer": "Benjamin Tissot (also known as Bensound)",
+          "description": "Happy and light royalty free ukulele music featuring ukulele, finger snapping, pizzicato strings and drums. This track will be great to add this \"feel good\" mood to your projects.",
+          "image": {
+            "url": "images/ukulele.jpg",
+            "description": "Image copyright: bluelela - Shutterstock"
+          },
+          "tags": [
+            "ukulele", "happy", "funny", "advertising", "upbeat", "kid", "kids", "positive", "chidren", "joy", "fun", "acoustic", "light", "gentle" 
+          ]
+        },
+        {
+          "id": "bensound-anewbeginning-03",
+          "url": "audio/bensound-anewbeginning.mp3",
+          "title": "A New Beginning",
+          "composer": "Benjamin Tissot (also known as Bensound)",
+          "description": "Pop rock royalty free music with an epic and \"achievement\" feeling. The song start with a guitar intro that progressively lead to a powerful and energetic chorus.",
+          "image": {
+            "url": "images/anewbeginning.jpg",
+            "description": "Image copyright: Olga Zakharova - Shutterstock"
+          },
+          "tags": [
+            "rock", "uplifting", "success", "positive", "hope", "hopeful", "optimistic", "motivation", "invincible", "corporate", "electric", "guitar", "epic", "energy", "energetic", "emotional", "confidence", "business", "piano" 
+          ]
+        },
+        {
+          "id": "bensound-ukulele-023",
+          "url": "audio/bensound-ukulele.mp3",
+          "title": "Ukulele",
+          "composer": "Benjamin Tissot (also known as Bensound)",
+          "description": "Happy and light royalty free ukulele music featuring ukulele, finger snapping, pizzicato strings and drums. This track will be great to add this \"feel good\" mood to your projects.",
+          "image": {
+            "url": "images/ukulele.jpg",
+            "description": "Image copyright: bluelela - Shutterstock"
+          },
+          "tags": [
+            "ukulele", "happy", "funny", "advertising", "upbeat", "kid", "kids", "positive", "chidren", "joy", "fun", "acoustic", "light", "gentle" 
+          ]
+        },
+        {
+          "id": "bensound-ukulele-024",
+          "url": "audio/bensound-ukulele.mp3",
+          "title": "Ukulele",
+          "composer": "Benjamin Tissot (also known as Bensound)",
+          "description": "Happy and light royalty free ukulele music featuring ukulele, finger snapping, pizzicato strings and drums. This track will be great to add this \"feel good\" mood to your projects.",
+          "image": {
+            "url": "images/ukulele.jpg",
+            "description": "Image copyright: bluelela - Shutterstock"
+          },
+          "tags": [
+            "ukulele", "happy", "funny", "advertising", "upbeat", "kid", "kids", "positive", "chidren", "joy", "fun", "acoustic", "light", "gentle" 
+          ]
+        }
       ]
     },
     {
-      "id": "bensound-ukulele-nlkedt",
-      "url": "assets/audio/bensound-ukulele.mp3",
-      "title": "Ukulele",
-      "composer": "Benjamin Tissot (also known as Bensound)",
-      "description": "Happy and light royalty free ukulele music featuring ukulele, finger snapping, pizzicato strings and drums. This track will be great to add this \"feel good\" mood to your projects.",
-      "image": {
-        "url": "assets/images/ukulele.jpg",
-        "description": "Image copyright: bluelela - Shutterstock"
-      },
-      "tags": [
-        "ukulele", "happy", "funny", "advertising", "upbeat", "kid", "kids", "positive", "chidren", "joy", "fun", "acoustic", "light", "gentle" 
+      "id": "ozmdgof-02",
+      "title": "List Number Two",
+      "description": "Playlist with Wonderful Pop Rock Royalty Free Music. ",
+      "records": [
+        {
+          "id": "bensound-anewbeginning-04",
+          "url": "audio/bensound-anewbeginning.mp3",
+          "title": "A New Beginning",
+          "composer": "Benjamin Tissot (also known as Bensound)",
+          "description": "Pop rock royalty free music with an epic and \"achievement\" feeling. The song start with a guitar intro that progressively lead to a powerful and energetic chorus.",
+          "image": {
+            "url": "images/anewbeginning.jpg",
+            "description": "Image copyright: Olga Zakharova - Shutterstock"
+          },
+          "tags": [
+            "rock", "uplifting", "success", "positive", "hope", "hopeful", "optimistic", "motivation", "invincible", "corporate", "electric", "guitar", "epic", "energy", "energetic", "emotional", "confidence", "business", "piano" 
+          ]
+        },
+        {
+          "id": "bensound-ukulele-05",
+          "url": "audio/bensound-ukulele.mp3",
+          "title": "Ukulele",
+          "composer": "Benjamin Tissot (also known as Bensound)",
+          "description": "Happy and light royalty free ukulele music featuring ukulele, finger snapping, pizzicato strings and drums. This track will be great to add this \"feel good\" mood to your projects.",
+          "image": {
+            "url": "images/ukulele.jpg",
+            "description": "Image copyright: bluelela - Shutterstock"
+          },
+          "tags": [
+            "ukulele", "happy", "funny", "advertising", "upbeat", "kid", "kids", "positive", "chidren", "joy", "fun", "acoustic", "light", "gentle" 
+          ]
+        },
+        {
+          "id": "bensound-anewbeginning-06",
+          "url": "audio/bensound-anewbeginning.mp3",
+          "title": "A New Beginning",
+          "composer": "Benjamin Tissot (also known as Bensound)",
+          "description": "Pop rock royalty free music with an epic and \"achievement\" feeling. The song start with a guitar intro that progressively lead to a powerful and energetic chorus.",
+          "image": {
+            "url": "images/anewbeginning.jpg",
+            "description": "Image copyright: Olga Zakharova - Shutterstock"
+          },
+          "tags": [
+            "rock", "uplifting", "success", "positive", "hope", "hopeful", "optimistic", "motivation", "invincible", "corporate", "electric", "guitar", "epic", "energy", "energetic", "emotional", "confidence", "business", "piano" 
+          ]
+        },
+        {
+          "id": "bensound-ukulele-07",
+          "url": "audio/bensound-ukulele.mp3",
+          "title": "Ukulele",
+          "composer": "Benjamin Tissot (also known as Bensound)",
+          "description": "Happy and light royalty free ukulele music featuring ukulele, finger snapping, pizzicato strings and drums. This track will be great to add this \"feel good\" mood to your projects.",
+          "image": {
+            "url": "images/ukulele.jpg",
+            "description": "Image copyright: bluelela - Shutterstock"
+          },
+          "tags": [
+            "ukulele", "happy", "funny", "advertising", "upbeat", "kid", "kids", "positive", "chidren", "joy", "fun", "acoustic", "light", "gentle" 
+          ]
+        }
       ]
     }
   ]

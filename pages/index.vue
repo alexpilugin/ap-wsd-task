@@ -1,16 +1,18 @@
 <template>
   <section class="container">
-    <v-row justify="center" align="center">
+    <v-row align="start" justify="center">
       <v-col cols="12">
-        <VuetifyCard />
+        <AudioRecordsCard />
       </v-col>
     </v-row>
+
+    <!--
     <v-row justify="center" align="center">
       <v-col cols="12">
         <div>
           <h1 class="title">nuxt-express</h1>
           <div>
-            {{ test }}
+            {{ records }}
             <div class="links">
               <a href="/users" class="button--green"> Users List </a>
             </div>
@@ -36,16 +38,18 @@
         </div>
       </v-col>
     </v-row>
+    -->
   </section>
 </template>
 
 <script>
-import VuetifyCard from '~/components/VuetifyCard.vue'
+import AudioRecordsCard from '~/components/AudioRecordsCard.vue'
 
 export default {
   components: {
-    VuetifyCard,
+    AudioRecordsCard,
   },
+  /* asyncData() available only on pages */
   async asyncData({ $http }) {
     const test = await $http.$get('/api/test')
     return {
@@ -61,7 +65,7 @@ export default {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   text-align: center;
 }
 

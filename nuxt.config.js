@@ -26,7 +26,10 @@ export default {
   css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [],
+  // https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-plugins/
+  plugins: [
+    { src: '~/plugins/vue-audio-visual.js', mode: 'client' }
+  ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -103,6 +106,7 @@ export default {
   build: {
     parallel: true,
     cache: true,
+    sourceMap: false,
     transpile: ['vue-intersect'],
     buildDir: '.nuxt',
     publicPath: '/assets/',
@@ -134,6 +138,16 @@ export default {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
+      // Extend Webpack to load image files
+      config.module.rules.push({
+        test: /\.(png|jpe?g|gif|svg|webp)$/,
+        loader: 'file-loader',
+        query: {
+          limit: 1000, // 1kB
+          name: 'img/[name].[hash:7].[ext]'
+        }
+      })
+      
       // Extend Webpack to load audio files
       config.module.rules.push({
         test: /\.(ogg|mp3|mp4|wav|mpe?g)$/i,

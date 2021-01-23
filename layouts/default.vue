@@ -2,12 +2,12 @@
   <v-app dark>
     <TopNavbar />
     <v-main>
-      <v-container>
+      <v-container fill-height fluid>
         <nuxt />
       </v-container>
     </v-main>
 
-    <v-footer app>
+    <v-footer app absolute>
       <span>&copy; A.Pilugin {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
@@ -19,6 +19,15 @@ export default {
   name: 'DefaultLayout',
   components: {
     TopNavbar,
+  },
+  async asyncData({ $http }) {
+    const test = await $http.$get('/api/test')
+    const recs = await $http.$get('/api/records')
+    console.log(recs)
+    return {
+      test,
+      recs,
+    }
   },
 }
 </script>
