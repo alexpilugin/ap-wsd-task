@@ -28,7 +28,8 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   // https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-plugins/
   plugins: [
-    { src: '~/plugins/vue-audio-visual.js', mode: 'client' }
+    { src: '~/plugins/vue-audio-visual.js', mode: 'client' },
+    {src: '~/plugins/vue-wave-surfer.js', mode: 'client' }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

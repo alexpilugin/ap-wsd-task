@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-title class="headline blue-color" color="#AEDEFF">
+    <v-card-title class="play-top-title headline blue-color" color="#AEDEFF">
       <span>Playlist Manager</span>
       <v-spacer></v-spacer>
       <v-btn
@@ -91,16 +91,28 @@
                       dark
                       x-small
                       color="primary"
+                      @click="play(record, index)"
                     >
                       <v-icon dark> mdi-play </v-icon>
                     </v-btn>
                   </div>
                   <div class="ml-2">
-                    <h2 class="text-sm-left title blue-color">
+                    <h2
+                      class="text-sm-left title blue-color col"
+                      style="width: auto"
+                    >
                       {{ index + 1 }}. {{ record.title }}
                     </h2>
                   </div>
-                  <div class="ml-2">
+                  <vue-wave-surfer
+                    v-show="showPlayer && selectedPlayer == index + 1"
+                    :ref="`surf${index}`"
+                    :src="record.url"
+                    :options="vwsOptions"
+                    class="vue-wave-surfer col"
+                  ></vue-wave-surfer>
+                  <!--
+                  <div v-show="showPlayer && selectedPlayer == index + 1">
                     <av-waveform
                       :audio-src="record.url"
                       playtime-line-color="#aedeff"
@@ -109,6 +121,7 @@
                       class="av-waveform"
                     ></av-waveform>
                   </div>
+                  -->
                 </v-layout>
               </v-container>
               <!--
@@ -145,9 +158,63 @@ export default {
   data() {
     return {
       playlistExpandedMode: false,
+      showPlayer: false,
+      selectedPlayer: -1,
+      // https://wavesurfer-js.org/docs/options.html
+      vwsOptions: {
+        normalize: true,
+        partialRender: true,
+        responsive: true,
+        fillParent: true,
+        mediaType: 'audio',
+        removeMediaElementOnDestroy: false,
+      },
       expandedPanels: [],
       lists: [],
     }
+  },
+  computed: {
+    player() {
+      if (this.selectedPlayer !== -1) {
+        const ref = `surf${this.selectedPlayer - 1}`
+        console.log('ref:', ref)
+        console.log('this.$refs:', this.$refs)
+        const waveSurfer = this.$refs[ref][0].waveSurfer
+        console.log('waveSurfer:', waveSurfer)
+        return waveSurfer
+      }
+      return undefined
+    },
+  },
+  watch: {
+    player(waveSurfer, previous) {
+      // https://wavesurfer-js.org/docs/methods.html
+      if (waveSurfer) {
+        waveSurfer.on('ready', () => {
+          waveSurfer.play()
+          console.log('waveSurfer.play')
+        })
+      } else if (previous) {
+        previous.stop()
+      }
+    },
+  },
+  mounted() {
+    if (this.player) {
+      this.player.on('ready', () => {
+        console.log('ready')
+      })
+    }
+  },
+  methods: {
+    play(record, index) {
+      this.showPlayer = !this.showPlayer
+      this.selectedPlayer = this.showPlayer ? index + 1 : -1
+
+      this.$nextTick(() => {
+        this.$forceUpdate()
+      })
+    },
   },
   /* call fetch only on client-side
    * fetchOnServer: false
@@ -169,5 +236,8 @@ ul {
 }
 .av-waveform > audio {
   visibility: hidden;
+}
+.play-top-title {
+  background: #333;
 }
 </style>
