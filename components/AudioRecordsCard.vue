@@ -15,6 +15,41 @@
         <v-icon v-else>mdi-card-text-outline</v-icon>
       </v-btn>
     </v-card-title>
+
+    <div v-if="selectedAudioRecord">
+      <div class="info-container">
+        <v-img
+          max-width="120"
+          class="ma-2"
+          :src="selectedAudioRecord.image.url"
+          :lazy-src="selectedAudioRecord.image.url"
+          contain
+        ></v-img>
+        <div class="ml-2">
+          <h2 class="text-left title blue-color">
+            {{ selectedAudioRecord.title }}
+          </h2>
+          <p class="text-left body-1">
+            {{ selectedAudioRecord.description }}
+          </p>
+        </div>
+      </div>
+      <v-layout row wrap>
+        <v-col ref="avwrap" v-resize="onResize">
+          <!-- <AudioCanvas :max-height="100" /> -->
+          <AvPlayer
+            :audio-src="selectedAudioRecord.url"
+            :play="isPlaying"
+            wave-color="#AEDEFF"
+            :segment-quantity="80"
+            played-line-color="#AEDEFF"
+            noplayed-line-color="#1A67C0"
+          />
+        </v-col>
+      </v-layout>
+    </div>
+
+    <!-- Expansion Panel -->
     <v-expansion-panels v-model="expandedPanels" multiple>
       <v-expansion-panel v-for="(list, i) in lists" :key="i">
         <v-expansion-panel-header class="subheading">
@@ -65,6 +100,8 @@
                       {{ index + 1 }}. {{ record.title }}
                     </h2>
                     <p class="text-sm-left body-1">{{ record.description }}</p>
+                    <!-- TAGS --->
+                    <!--
                     <div class="text-sm-left">
                       <v-chip
                         v-for="(tag, n) in record.tags"
@@ -77,6 +114,7 @@
                         >{{ tag }}</v-chip
                       >
                     </div>
+                    -->
                   </div>
                 </v-layout>
               </v-container>
@@ -104,13 +142,6 @@
                       {{ index + 1 }}. {{ record.title }}
                     </h2>
                   </div>
-                  <vue-wave-surfer
-                    v-show="showPlayer && selectedPlayer == index + 1"
-                    :ref="`surf${index}`"
-                    :src="record.url"
-                    :options="vwsOptions"
-                    class="vue-wave-surfer col"
-                  ></vue-wave-surfer>
                   <!--
                   <div v-show="showPlayer && selectedPlayer == index + 1">
                     <av-waveform
@@ -140,8 +171,14 @@
 </template>
 
 <script>
+// import AudioCanvas from '@/components/AudioCanvas.vue'
+import AvPlayer from '@/components/AvPlayer.vue'
 export default {
   name: 'AudioRecordsCard',
+  components: {
+    // AudioCanvas,
+    AvPlayer,
+  },
   /* asyncData() not available on Components
    * https://nuxtjs.org/docs/2.x/features/data-fetching/
    */
@@ -157,9 +194,11 @@ export default {
   },
   data() {
     return {
+      playerW: undefined,
+      playerH: undefined,
       playlistExpandedMode: false,
-      showPlayer: false,
-      selectedPlayer: -1,
+      isPlaying: false,
+      selectedAudioRecord: null,
       // https://wavesurfer-js.org/docs/options.html
       vwsOptions: {
         normalize: true,
@@ -175,15 +214,7 @@ export default {
   },
   computed: {
     player() {
-      if (this.selectedPlayer !== -1) {
-        const ref = `surf${this.selectedPlayer - 1}`
-        console.log('ref:', ref)
-        console.log('this.$refs:', this.$refs)
-        const waveSurfer = this.$refs[ref][0].waveSurfer
-        console.log('waveSurfer:', waveSurfer)
-        return waveSurfer
-      }
-      return undefined
+      return this.$refs.surf ? this.$refs.surf.waveSurfer : undefined
     },
   },
   watch: {
@@ -200,20 +231,50 @@ export default {
     },
   },
   mounted() {
-    if (this.player) {
-      this.player.on('ready', () => {
-        console.log('ready')
-      })
+    if (this.$refs.avwrap) {
+      this.onResize()
     }
   },
   methods: {
+    onResize(event) {
+      const avWraper = this.$refs.avwrap
+      this.playerW = Math.floor(avWraper.clientWidth)
+      this.playerH = Math.floor(this.playerW / 10) // ratio
+      console.log('resized() W:', this.playerW, 'H:', this.playerH)
+    },
     play(record, index) {
-      this.showPlayer = !this.showPlayer
+      // check if it's playing already
+      if (this.isPlaying) {
+        // check if it's the same audio
+        if (
+          !!this.selectedAudioRecord &&
+          this.selectedAudioRecord.id === record.id
+        ) {
+          this.isPlaying = false
+          this.selectedAudioRecord = null
+        } else {
+          // continue playing but another audio
+          this.selectedAudioRecord = record
+        }
+      } else {
+        // start playing audio
+        this.isPlaying = true
+        this.selectedAudioRecord = record
+      }
+
+      /*
+      if (this.selectedPlayer !== -1) {
+        // check if it's the same button
+        if(this.selectedPlayer == index + 1) {
+          this.showPlayer = !this.showPlayer
+        }
+      }
       this.selectedPlayer = this.showPlayer ? index + 1 : -1
 
       this.$nextTick(() => {
         this.$forceUpdate()
       })
+      */
     },
   },
   /* call fetch only on client-side
@@ -239,5 +300,12 @@ ul {
 }
 .play-top-title {
   background: #333;
+}
+.info-container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: center;
 }
 </style>
