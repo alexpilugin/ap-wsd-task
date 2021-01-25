@@ -27,10 +27,28 @@
         ></v-img>
         <div class="ml-2">
           <h2 class="text-left title blue-color">
-            {{ selectedAudioRecord.title }}
+            <router-link
+              :to="`/album/${selectedAudioRecord.listId}/audio/${selectedAudioRecord.id}`"
+              class="ma-0 pa-0"
+            >
+              {{ selectedAudioRecord.title }}
+            </router-link>
           </h2>
           <p class="text-left body-1">
             {{ selectedAudioRecord.description }}
+          </p>
+        </div>
+        <div class="text-sm-left text-caption mt-5">
+          <h4>FREE License with Attribution</h4>
+          <h4>
+            Free Audio file from
+            <a href="https://www.bensound.com">www.bensound.com</a>
+          </h4>
+          <p>
+            You are free to use this music in your multimedia project (online
+            videos(YouTube,...), websites, animations, etc.) as long as you
+            credit Bensound.com, For example: "Music: www.bensound.com" or
+            "Royalty Free Music from Bensound"
           </p>
         </div>
       </div>
@@ -97,24 +115,14 @@
                   ></v-img>
                   <div class="ml-2">
                     <h2 class="text-sm-left title blue-color">
-                      {{ index + 1 }}. {{ record.title }}
+                      <router-link
+                        :to="`/album/${record.listId}/audio/${record.id}`"
+                        class="record-link ma-0 pa-0"
+                      >
+                        {{ index + 1 }}. {{ record.title }}
+                      </router-link>
                     </h2>
                     <p class="text-sm-left body-1">{{ record.description }}</p>
-                    <!-- TAGS --->
-                    <!--
-                    <div class="text-sm-left">
-                      <v-chip
-                        v-for="(tag, n) in record.tags"
-                        :key="`tag-${n}`"
-                        tags
-                        outlined
-                        small
-                        color="primary"
-                        class="ma-1"
-                        >{{ tag }}</v-chip
-                      >
-                    </div>
-                    -->
                   </div>
                 </v-layout>
               </v-container>
@@ -139,29 +147,16 @@
                       class="text-sm-left title blue-color col"
                       style="width: auto"
                     >
-                      {{ index + 1 }}. {{ record.title }}
+                      <router-link
+                        :to="`/album/${record.listId}/audio/${record.id}`"
+                        class="record-link ma-0 pa-0"
+                      >
+                        {{ index + 1 }}. {{ record.title }}
+                      </router-link>
                     </h2>
                   </div>
-                  <!--
-                  <div v-show="showPlayer && selectedPlayer == index + 1">
-                    <av-waveform
-                      :audio-src="record.url"
-                      playtime-line-color="#aedeff"
-                      playtime-slider-color="#aedeff"
-                      playtime-clickable
-                      class="av-waveform"
-                    ></av-waveform>
-                  </div>
-                  -->
                 </v-layout>
               </v-container>
-              <!--
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn text color="secondary"> Cancel </v-btn>
-                <v-btn text color="primary"> Save </v-btn>
-              </v-card-actions>
-              -->
             </li>
           </ul>
         </v-expansion-panel-content>
@@ -307,5 +302,9 @@ ul {
   justify-content: center;
   align-items: flex-start;
   text-align: center;
+}
+.record-link {
+  text-decoration: none !important;
+  color: #aedeff;
 }
 </style>

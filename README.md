@@ -1,5 +1,17 @@
 # ap-wsd-task
 
+Created by Alex Pilugin as a technical assignment for **[Wall Street Docs](https://www.wsd.tech)** in January 2021.
+This Nuxt Universal (SSR) web app is bootstrapped with [nuxt-express template](https://github.com/nuxt-community/express-template)     
+This web application support SCSS preprocessor: [https://nuxtjs.org/faq/pre-processors/](https://nuxtjs.org/faq/pre-processors/)
+
+Main feature of this application is Server Middleware:
+```bash
+# Server Middleware
+  serverMiddleware: {
+    '/api': '~/api'
+  },
+```
+
 ## Build Setup
 
 ```bash
