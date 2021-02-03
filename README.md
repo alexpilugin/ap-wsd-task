@@ -41,3 +41,13 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 ![screenshot ap-wsd-06.png](https://github.com/alexpilugin/ap-wsd-task/blob/main/static/screenshots/ap-wsd-06.png "screenshot ap-wsd-06.png") 
 ![screenshot ap-wsd-404.png](https://github.com/alexpilugin/ap-wsd-task/blob/main/static/screenshots/ap-wsd-404.png "screenshot ap-wsd-404.png") 
 ![screenshot ap-wsd-routes.png](https://github.com/alexpilugin/ap-wsd-task/blob/main/static/screenshots/ap-wsd-routes.png "screenshot ap-wsd-routes.png") 
+
+# Update 03 Feb 2021
+
+I had to create my own component to depict the audio waveform based on svg (scalable vector graphics) to support responsive design (window's resize event).
+There is some delay with clicking "Play" button and the ***canplay** event (audio.oncanplay) since the audio component needs time to download a audio file.
+This application doesn't use Vuex and SCSS (I can add it for money, not for free)
+
+![screenshot ap-wsd-07.png](https://github.com/alexpilugin/ap-wsd-task/blob/main/static/screenshots/ap-wsd-07.png "screenshot ap-wsd-07.png") 
+![screenshot ap-wsd-08.png](https://github.com/alexpilugin/ap-wsd-task/blob/main/static/screenshots/ap-wsd-08.png "screenshot ap-wsd-08.png") 
+![screenshot ap-wsd-09.png](https://github.com/alexpilugin/ap-wsd-task/blob/main/static/screenshots/ap-wsd-09.png "screenshot ap-wsd-09.png") 

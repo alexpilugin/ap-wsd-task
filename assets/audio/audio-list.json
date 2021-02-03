@@ -1,7 +1,7 @@
 {
   "lists": [
     {
-      "id": "azbdhoh-01",
+      "id": "album-01",
       "title": "List Number One",
       "description": "Playlist with Wonderful Pop Rock Royalty Free Music. ",
       "records": [
@@ -18,7 +18,7 @@
           "tags": [
             "rock", "uplifting", "success", "positive", "hope", "hopeful", "optimistic", "motivation", "invincible", "corporate", "electric", "guitar", "epic", "energy", "energetic", "emotional", "confidence", "business", "piano" 
           ],
-          "listId": "azbdhoh-01",
+          "listId": "album-01",
           "listTitle": "List Number One"
         },
         {
@@ -34,23 +34,23 @@
           "tags": [
             "ukulele", "happy", "funny", "advertising", "upbeat", "kid", "kids", "positive", "chidren", "joy", "fun", "acoustic", "light", "gentle" 
           ],
-          "listId": "azbdhoh-01",
+          "listId": "album-01",
           "listTitle": "List Number One"
         },
         {
-          "id": "bensound-ukulele-022",
-          "url": "audio/bensound-ukulele.mp3",
-          "title": "Ukulele",
+          "id": "bensound-happyrock-022",
+          "url": "audio/bensound-happyrock.mp3",
+          "title": "Happy Rock",
           "composer": "Benjamin Tissot (also known as Bensound)",
-          "description": "Happy and light royalty free ukulele music featuring ukulele, finger snapping, pizzicato strings and drums. This track will be great to add this \"feel good\" mood to your projects.",
+          "description": "An uplifting positive and happy rock royalty free music track featuring drums, bass, hand claps and electric guitar catchy riffs.",
           "image": {
-            "url": "images/ukulele.jpg",
-            "description": "Image copyright: bluelela - Shutterstock"
+            "url": "images/happyrock.jpg",
+            "description": "Image copyright: alicedaniel - Shutterstock"
           },
           "tags": [
-            "ukulele", "happy", "funny", "advertising", "upbeat", "kid", "kids", "positive", "chidren", "joy", "fun", "acoustic", "light", "gentle" 
+            "rock", "happy", "catchy", "energetic", "corporate", "cool", "upbeat", "winner", "winning", "positive", "extreme", "sport", "fun", "motivation", "action", "speed", "fast", "joy", "electric", "guitar", "distorded", "uplifting", "claps", "clapping", "hand", "advertising", "commercial"
           ],
-          "listId": "azbdhoh-01",
+          "listId": "album-01",
           "listTitle": "List Number One"
         },
         {
@@ -66,7 +66,7 @@
           "tags": [
             "rock", "uplifting", "success", "positive", "hope", "hopeful", "optimistic", "motivation", "invincible", "corporate", "electric", "guitar", "epic", "energy", "energetic", "emotional", "confidence", "business", "piano" 
           ],
-          "listId": "azbdhoh-01",
+          "listId": "album-01",
           "listTitle": "List Number One"
         },
         {
@@ -82,48 +82,32 @@
           "tags": [
             "ukulele", "happy", "funny", "advertising", "upbeat", "kid", "kids", "positive", "chidren", "joy", "fun", "acoustic", "light", "gentle" 
           ],
-          "listId": "azbdhoh-01",
+          "listId": "album-01",
           "listTitle": "List Number One"
         },
         {
-          "id": "bensound-ukulele-024",
-          "url": "audio/bensound-ukulele.mp3",
-          "title": "Ukulele",
+          "id": "bensound-buddy-024",
+          "url": "audio/bensound-buddy.mp3",
+          "title": "Buddy",
           "composer": "Benjamin Tissot (also known as Bensound)",
-          "description": "Happy and light royalty free ukulele music featuring ukulele, finger snapping, pizzicato strings and drums. This track will be great to add this \"feel good\" mood to your projects.",
+          "description": "Nice piano and ukulele royalty free music with a childish and happy mood. Instruments: Piano, glockenspiel, hand claps and ukulele. This track will be great to add a \"feel good\" mood to your videos.",
           "image": {
-            "url": "images/ukulele.jpg",
-            "description": "Image copyright: bluelela - Shutterstock"
+            "url": "images/buddy.jpg",
+            "description": "Image copyright: Vector pro - Shutterstock"
           },
           "tags": [
-            "ukulele", "happy", "funny", "advertising", "upbeat", "kid", "kids", "positive", "chidren", "joy", "fun", "acoustic", "light", "gentle" 
+            "cute", "light", "happy", "fun", "kids", "children's", "joy", "advertising", "corporate", "motivation", "fresh", "positive", "claps", "clapping", "glockenspiek", "bells", "acoustic", "pian", "ukulele", "presentation", "commercial", "ad", "funny", "cartoon", "catchy", "bouncy", "animation"
           ],
-          "listId": "azbdhoh-01",
+          "listId": "album-01",
           "listTitle": "List Number One"
         }
       ]
     },
     {
-      "id": "ozmdgof-02",
-      "title": "List Number Two",
+      "id": "album-02",
+      "title": "Album Number Two: Free to play music",
       "description": "Playlist with Wonderful Pop Rock Royalty Free Music. ",
       "records": [
-        {
-          "id": "bensound-anewbeginning-04",
-          "url": "audio/bensound-anewbeginning.mp3",
-          "title": "A New Beginning",
-          "composer": "Benjamin Tissot (also known as Bensound)",
-          "description": "Pop rock royalty free music with an epic and \"achievement\" feeling. The song start with a guitar intro that progressively lead to a powerful and energetic chorus.",
-          "image": {
-            "url": "images/anewbeginning.jpg",
-            "description": "Image copyright: Olga Zakharova - Shutterstock"
-          },
-          "tags": [
-            "rock", "uplifting", "success", "positive", "hope", "hopeful", "optimistic", "motivation", "invincible", "corporate", "electric", "guitar", "epic", "energy", "energetic", "emotional", "confidence", "business", "piano" 
-          ],
-          "listId": "ozmdgof-02",
-          "listTitle": "List Number Two"
-        },
         {
           "id": "bensound-ukulele-05",
           "url": "audio/bensound-ukulele.mp3",
@@ -137,11 +121,11 @@
           "tags": [
             "ukulele", "happy", "funny", "advertising", "upbeat", "kid", "kids", "positive", "chidren", "joy", "fun", "acoustic", "light", "gentle" 
           ],
-          "listId": "ozmdgof-02",
-          "listTitle": "List Number Two"
+          "listId": "album-02",
+          "listTitle": "Album Number Two: Free to play music"
         },
         {
-          "id": "bensound-anewbeginning-06",
+          "id": "bensound-anewbeginning-04",
           "url": "audio/bensound-anewbeginning.mp3",
           "title": "A New Beginning",
           "composer": "Benjamin Tissot (also known as Bensound)",
@@ -153,24 +137,40 @@
           "tags": [
             "rock", "uplifting", "success", "positive", "hope", "hopeful", "optimistic", "motivation", "invincible", "corporate", "electric", "guitar", "epic", "energy", "energetic", "emotional", "confidence", "business", "piano" 
           ],
-          "listId": "ozmdgof-02",
-          "listTitle": "List Number Two"
+          "listId": "album-02",
+          "listTitle": "Album Number Two: Free to play music"
         },
         {
-          "id": "bensound-ukulele-07",
-          "url": "audio/bensound-ukulele.mp3",
-          "title": "Ukulele",
+          "id": "bensound-happyrock-06",
+          "url": "audio/bensound-happyrock.mp3",
+          "title": "Happy Rock",
           "composer": "Benjamin Tissot (also known as Bensound)",
-          "description": "Happy and light royalty free ukulele music featuring ukulele, finger snapping, pizzicato strings and drums. This track will be great to add this \"feel good\" mood to your projects.",
+          "description": "An uplifting positive and happy rock royalty free music track featuring drums, bass, hand claps and electric guitar catchy riffs.",
           "image": {
-            "url": "images/ukulele.jpg",
-            "description": "Image copyright: bluelela - Shutterstock"
+            "url": "images/happyrock.jpg",
+            "description": "Image copyright: alicedaniel - Shutterstock"
           },
           "tags": [
-            "ukulele", "happy", "funny", "advertising", "upbeat", "kid", "kids", "positive", "chidren", "joy", "fun", "acoustic", "light", "gentle" 
+            "rock", "happy", "catchy", "energetic", "corporate", "cool", "upbeat", "winner", "winning", "positive", "extreme", "sport", "fun", "motivation", "action", "speed", "fast", "joy", "electric", "guitar", "distorded", "uplifting", "claps", "clapping", "hand", "advertising", "commercial"
           ],
-          "listId": "ozmdgof-02",
-          "listTitle": "List Number Two"
+          "listId": "album-02",
+          "listTitle": "Album Number Two: Free to play music"
+        },
+        {
+          "id": "bensound-buddy-07",
+          "url": "audio/bensound-buddy.mp3",
+          "title": "Buddy",
+          "composer": "Benjamin Tissot (also known as Bensound)",
+          "description": "Nice piano and ukulele royalty free music with a childish and happy mood. Instruments: Piano, glockenspiel, hand claps and ukulele. This track will be great to add a \"feel good\" mood to your videos.",
+          "image": {
+            "url": "images/buddy.jpg",
+            "description": "Image copyright: Vector pro - Shutterstock"
+          },
+          "tags": [
+            "cute", "light", "happy", "fun", "kids", "children's", "joy", "advertising", "corporate", "motivation", "fresh", "positive", "claps", "clapping", "glockenspiek", "bells", "acoustic", "pian", "ukulele", "presentation", "commercial", "ad", "funny", "cartoon", "catchy", "bouncy", "animation"
+          ],
+          "listId": "album-02",
+          "listTitle": "Album Number Two: Free to play music"
         }
       ]
     }

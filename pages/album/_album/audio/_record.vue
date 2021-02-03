@@ -2,6 +2,15 @@
   <section class="container">
     <v-card>
       <v-card-title primary-title>
+        <AvSVG2
+          :audio-src="`/${record.url}`"
+          :play="play"
+          @ontimeline="onUpdate"
+        />
+        <div>
+          <!-- <AvWave :audio-src="`/${record.url}`" /> -->
+          <br />
+        </div>
         <div class="d-flex text-left">
           <v-img
             max-width="180"
@@ -11,8 +20,11 @@
             contain
           ></v-img>
           <div class="ml-3">
-            <h3 class="headline blue-color mb-0">
-              <span> {{ title }}</span>
+            <h3
+              class="click-play headline blue-color mb-0"
+              @click="clickAndPlay"
+            >
+              <span> {{ title }} ({{ duration }}/{{ currentTime }})</span>
             </h3>
             <h4 class="subtitle-1 blue-color mb-0">
               <span> {{ albumName }}</span>
@@ -70,7 +82,13 @@
 </template>
 
 <script>
+import AvSVG2 from '@/components/AvSVG2.vue'
+
 export default {
+  name: 'RecordPage',
+  components: {
+    AvSVG2,
+  },
   async asyncData({ params, error, $http }) {
     const data = await $http.$get(
       `/api/records/${params.album}/${params.record}`
@@ -78,6 +96,13 @@ export default {
     const record = JSON.parse(data)
     return {
       record,
+    }
+  },
+  data() {
+    return {
+      play: false,
+      duration: '',
+      currentTime: '',
     }
   },
   computed: {
@@ -95,6 +120,16 @@ export default {
     },
     imgUrl() {
       return this.record ? `/${this.record.image.url}` : ''
+    },
+  },
+  methods: {
+    clickAndPlay() {
+      console.log('clickAndPlay')
+      this.play = !this.play
+    },
+    onUpdate(payload) {
+      this.duration = payload.duration
+      this.currentTime = payload.currentTime
     },
   },
   head() {
@@ -139,5 +174,9 @@ export default {
 }
 .play-top-title {
   background: #333;
+}
+.click-play {
+  cursor: pointer;
+  font-weight: bold;
 }
 </style>

@@ -1,23 +1,49 @@
 <template>
   <v-card>
     <v-card-title class="play-top-title headline blue-color" color="#AEDEFF">
-      <span>Playlist Manager</span>
-      <v-spacer></v-spacer>
+      <!-- <span>Playlist Manager</span> -->
       <v-btn
         color="secondary"
         fab
         text
-        x-small
+        small
         dark
-        @click="playlistExpandedMode = !playlistExpandedMode"
+        @click="
+          playlistExpandedMode = !playlistExpandedMode
+          showMode = 'list'
+        "
       >
         <v-icon v-if="playlistExpandedMode">mdi-card-text</v-icon>
         <v-icon v-else>mdi-card-text-outline</v-icon>
       </v-btn>
+      <v-btn color="secondary" fab text small dark @click="showMode = 'cards'">
+        <v-icon>mdi-apps-box</v-icon>
+      </v-btn>
+
+      <v-spacer></v-spacer>
+      <Dropdown v-if="lists" :items="listNames" @selected="onListSelection" />
+      <Dropdown
+        v-if="selectedListIndex !== null"
+        :items="songNames"
+        @selected="onSongSelection"
+      />
+      <div class="btn-wrapper ml-5">
+        <v-btn text @click="clickPrevious">
+          <v-icon>mdi-step-backward</v-icon>
+        </v-btn>
+        <v-btn text @click="isPlaying = !isPlaying">
+          <v-icon v-if="isPlaying">mdi-pause-circle</v-icon>
+          <v-icon v-else>mdi-play-circle</v-icon>
+        </v-btn>
+        <v-btn text @click="clickNext">
+          <v-icon>mdi-step-forward</v-icon>
+        </v-btn>
+      </div>
     </v-card-title>
 
+    <!-- Player -->
     <div v-if="selectedAudioRecord">
-      <div class="info-container">
+      <div class="info-container mt-5">
         <v-img
           max-width="120"
           class="ma-2"
@@ -25,7 +51,7 @@
           :lazy-src="selectedAudioRecord.image.url"
           contain
         ></v-img>
-        <div class="ml-2">
+        <div class="mx-3">
           <h2 class="text-left title blue-color">
             <router-link
               :to="`/album/${selectedAudioRecord.listId}/audio/${selectedAudioRecord.id}`"
@@ -33,12 +59,13 @@
             >
               {{ selectedAudioRecord.title }}
             </router-link>
+            ( {{ duration }} / {{ currentTime }} )
           </h2>
           <p class="text-left body-1">
             {{ selectedAudioRecord.description }}
           </p>
         </div>
-        <div class="text-sm-left text-caption mt-5">
+        <div class="text-sm-left text-caption mx-3">
           <h4>FREE License with Attribution</h4>
           <h4>
             Free Audio file from
@@ -52,32 +79,37 @@
           </p>
         </div>
       </div>
-      <v-layout row wrap>
-        <v-col ref="avwrap" v-resize="onResize">
-          <!-- <AudioCanvas :max-height="100" /> -->
-          <AvPlayer
-            :audio-src="selectedAudioRecord.url"
+      <v-layout row wrap class="pa-3">
+        <v-col ref="avwrap">
+          <AvSVG2
+            :audio-src="`/${selectedAudioRecord.url}`"
             :play="isPlaying"
-            wave-color="#AEDEFF"
-            :segment-quantity="80"
-            played-line-color="#AEDEFF"
-            noplayed-line-color="#1A67C0"
+            audio-ref="audio"
+            @ontimeline="onUpdate"
           />
+          <audio ref="audio" hidden></audio>
         </v-col>
       </v-layout>
     </div>
 
     <!-- Expansion Panel -->
-    <v-expansion-panels v-model="expandedPanels" multiple>
-      <v-expansion-panel v-for="(list, i) in lists" :key="i">
+    <v-expansion-panels
+      v-if="showMode == 'list'"
+      v-model="expandedPanels"
+      multiple
+    >
+      <v-expansion-panel
+        v-for="(list, listIndex) in lists"
+        :key="`ex${listIndex}`"
+      >
         <v-expansion-panel-header class="subheading">
           <div class="text-xs-center text-sm-left">
-            <span>{{ list.title }}</span>
-            <v-badge left color="primary" style="margin-left: 35px">
+            <v-badge left color="primary" style="margin-right: 15px">
               <template v-slot:badge>
                 <span>{{ list.records.length }}</span>
               </template>
             </v-badge>
+            <span>{{ list.title }}</span>
           </div>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
@@ -102,8 +134,10 @@
                       dark
                       x-small
                       color="primary"
+                      @click="play(record, listIndex)"
                     >
-                      <v-icon dark> mdi-play </v-icon>
+                      <v-icon v-if="isPlaying" dark> mdi-pause </v-icon>
+                      <v-icon v-else dark> mdi-play </v-icon>
                     </v-btn>
                   </div>
                   <v-img
@@ -137,9 +171,26 @@
                       dark
                       x-small
                       color="primary"
-                      @click="play(record, index)"
+                      @click="play(record, listIndex)"
                     >
-                      <v-icon dark> mdi-play </v-icon>
+                      <v-icon
+                        v-if="
+                          selectedAudioRecord.id === record.id &&
+                          isPlaying === true
+                        "
+                        dark
+                      >
+                        mdi-pause
+                      </v-icon>
+                      <v-icon
+                        v-if="
+                          selectedAudioRecord.id !== record.id ||
+                          isPlaying === false
+                        "
+                        dark
+                      >
+                        mdi-play
+                      </v-icon>
                     </v-btn>
                   </div>
                   <div class="ml-2">
@@ -162,25 +213,69 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
+
+    <!-- ShowMode=='cards' -->
+    <v-container v-if="showMode == 'cards'" fill-height fluid class="mx-0 px-0">
+      <v-layout
+        v-for="(list, listIndex) in lists"
+        :key="`row${listIndex}`"
+        fill-height
+        row
+      >
+        <v-col
+          v-for="(record, index) in list.records"
+          :key="`vc-${index}`"
+          cols="6"
+          sm="4"
+          lg="3"
+        >
+          <v-card>
+            <v-img
+              class="ma-2 record-image"
+              :src="record.image.url"
+              :lazy-src="record.image.url"
+              @click="play(record, listIndex)"
+            ></v-img>
+            <v-card-title primary-title>
+              <div>
+                <h2 class="text-sm-left title blue-color">
+                  <router-link
+                    :to="`/album/${record.listId}/audio/${record.id}`"
+                    class="record-link ma-0 pa-0"
+                  >
+                    {{ index + 1 }}. {{ record.title }}
+                  </router-link>
+                </h2>
+              </div>
+            </v-card-title>
+          </v-card>
+        </v-col>
+      </v-layout>
+    </v-container>
   </v-card>
 </template>
 
 <script>
-// import AudioCanvas from '@/components/AudioCanvas.vue'
-import AvPlayer from '@/components/AvPlayer.vue'
+import AvSVG2 from '@/components/AvSVG2.vue'
+import Dropdown from '@/components/Dropdown.vue'
+
 export default {
   name: 'AudioRecordsCard',
   components: {
-    // AudioCanvas,
-    AvPlayer,
+    AvSVG2,
+    Dropdown,
   },
   /* asyncData() not available on Components
    * https://nuxtjs.org/docs/2.x/features/data-fetching/
+   */
+  /* call fetch only on client-side
+   * fetchOnServer: false
    */
   async fetch() {
     /* fetch() is a special Nuxt.js function which used on both sides: serverside and userside */
     const data = await this.$http.$get('/api/records')
     this.lists = JSON.parse(data).lists
+    this.selectedAudioRecord = this.lists[0].records[0]
     /*
     this.lists = await fetch('https://api.nuxtjs.dev/posts').then((res) =>
       res.json()
@@ -189,8 +284,6 @@ export default {
   },
   data() {
     return {
-      playerW: undefined,
-      playerH: undefined,
       playlistExpandedMode: false,
       isPlaying: false,
       selectedAudioRecord: null,
@@ -205,76 +298,102 @@ export default {
       },
       expandedPanels: [],
       lists: [],
+      currentTime: '',
+      duration: '',
+      selectedListIndex: 0,
+      selectedSongIndex: 0,
+      audioRef: null,
+      showMode: 'list',
     }
   },
   computed: {
-    player() {
-      return this.$refs.surf ? this.$refs.surf.waveSurfer : undefined
+    listNames() {
+      return this.lists.map((list) => list.title)
     },
-  },
-  watch: {
-    player(waveSurfer, previous) {
-      // https://wavesurfer-js.org/docs/methods.html
-      if (waveSurfer) {
-        waveSurfer.on('ready', () => {
-          waveSurfer.play()
-          console.log('waveSurfer.play')
-        })
-      } else if (previous) {
-        previous.stop()
+    songNames() {
+      if (this.selectedListIndex !== null) {
+        console.log('songNames() listIndex: ', this.selectedListIndex)
+        if (this.lists && this.lists.length) {
+          return this.lists[this.selectedListIndex].records.map(
+            (record) => record.title
+          )
+        }
       }
+      return []
     },
   },
   mounted() {
-    if (this.$refs.avwrap) {
-      this.onResize()
-    }
+    if (this.$refs.audio) this.audioRef = this.$refs.audio
   },
   methods: {
-    onResize(event) {
-      const avWraper = this.$refs.avwrap
-      this.playerW = Math.floor(avWraper.clientWidth)
-      this.playerH = Math.floor(this.playerW / 10) // ratio
-      console.log('resized() W:', this.playerW, 'H:', this.playerH)
-    },
-    play(record, index) {
-      // check if it's playing already
-      if (this.isPlaying) {
-        // check if it's the same audio
-        if (
-          !!this.selectedAudioRecord &&
-          this.selectedAudioRecord.id === record.id
-        ) {
-          this.isPlaying = false
-          this.selectedAudioRecord = null
-        } else {
-          // continue playing but another audio
-          this.selectedAudioRecord = record
-        }
-      } else {
-        // start playing audio
-        this.isPlaying = true
+    play(record, listIndex) {
+      this.selectedListIndex = listIndex
+      if (this.selectedAudioRecord.id !== record.id) {
         this.selectedAudioRecord = record
+        setTimeout(function () {
+          this.isPlaying = true
+        }, 250)
+      } else {
+        this.isPlaying = !this.isPlaying
       }
+    },
+    clickPrevious() {
+      console.log('clickPrevious')
+      if (this.lists && this.lists.length) {
+        const listIndex = this.selectedListIndex
+        const list = this.lists[listIndex]
+        const length = list.records.length
 
-      /*
-      if (this.selectedPlayer !== -1) {
-        // check if it's the same button
-        if(this.selectedPlayer == index + 1) {
-          this.showPlayer = !this.showPlayer
+        if (this.selectedSongIndex - 1 > -1) {
+          this.selectedSongIndex--
+        } else {
+          this.selectedSongIndex = length - 1
         }
+        const songIndex = this.selectedSongIndex
+        this.selectedAudioRecord = list.records[songIndex]
+        this.isPlaying = false
+        setTimeout(function () {
+          this.isPlaying = true
+        }, 250)
       }
-      this.selectedPlayer = this.showPlayer ? index + 1 : -1
+    },
+    clickNext() {
+      console.log('clickNext')
+      if (this.lists && this.lists.length) {
+        const listIndex = this.selectedListIndex
+        const list = this.lists[listIndex]
+        console.log(listIndex)
+        const length = list.records.length
 
-      this.$nextTick(() => {
-        this.$forceUpdate()
-      })
-      */
+        if (this.selectedSongIndex + 1 < length) {
+          this.selectedSongIndex++
+        } else {
+          this.selectedSongIndex = 0
+        }
+        const songIndex = this.selectedSongIndex
+        this.selectedAudioRecord = list.records[songIndex]
+        this.isPlaying = false
+        setTimeout(function () {
+          this.isPlaying = true
+        }, 250)
+      }
+    },
+    onUpdate(payload) {
+      console.log('onUpdate', payload)
+      this.duration = payload.duration
+      this.currentTime = payload.currentTime
+    },
+    onListSelection(payload) {
+      this.selectedListIndex = payload
+      const songIndex = 0
+      this.selectedAudioRecord = this.lists[payload].records[songIndex]
+    },
+    onSongSelection(payload) {
+      this.selectedSongIndex = payload
+      const listIndex = this.selectedListIndex
+      this.selectedAudioRecord = this.lists[listIndex].records[payload]
     },
   },
-  /* call fetch only on client-side
-   * fetchOnServer: false
-   */
 }
 </script>
 
@@ -306,5 +425,23 @@ ul {
 .record-link {
   text-decoration: none !important;
   color: #aedeff;
+}
+.btn-wrapper {
+  border: solid 1px white;
+  border-radius: 4px;
+  padding: 0;
+}
+.record-image {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  -moz-transition: opacity 0.5s ease-out;
+  -webkit-transition: opacity 0.5s ease-out;
+  -o-transition: opacity 0.5s ease-out;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  cursor: pointer;
+}
+.record-image:hover {
+  opacity: 0.5;
 }
 </style>
